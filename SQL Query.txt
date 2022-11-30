@@ -2,3 +2,19 @@ UC1 :Ability to create a Address Book Service DB
 
 mysql> CREATE DATABASE address_book_service;
 Query OK, 1 row affected (0.70 sec)
+
+UC2 :Ability to create a Address Book Table with first and last names, address, city, state, zip, 
+phone number and email as its attributes
+
+mysql> CREATE TABLE address_book
+    ->      (
+    ->      firstName VARCHAR(100) NOT NULL,
+    ->      lastName VARCHAR(100) NOT NULL,
+    ->      address VARCHAR(200) NOT NULL,
+    ->      city VARCHAR(50) NOT NULL,
+    ->      state VARCHAR(50) NOT NULL,
+    ->      zip VARCHAR(50) NOT NULL,
+    ->      phoneNumber VARCHAR(50) NOT NULL,
+    ->      email VARCHAR(50) NOT NULL,
+    ->      );
+Query OK, 0 rows affected (0.10 sec)
