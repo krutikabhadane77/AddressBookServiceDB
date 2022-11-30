@@ -72,3 +72,13 @@ mysql> SELECT * FROM address_book ORDER BY firstName;
 +-----------+-------------+--------------+---------+-------------+--------+-------------+--------------+
 2 rows in set (0.05 sec)
 
+
+UC9 :Ability to identify each Address Book with name and Type.
+
+mysql> ALTER TABLE address_book ADD TYPE VARCHAR(10) DEFAULT 'Family';
+Query OK, 0 rows affected (0.22 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE address_book ADD NAME VARCHAR(10);
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
