@@ -1,0 +1,4 @@
+UC1 :Ability to create a Address Book Service DB
+
+mysql> CREATE DATABASE address_book_service;
+Query OK, 1 row affected (0.70 sec)
