@@ -39,3 +39,14 @@ UC5 :Ability to delete a person using person's name
 mysql> DELETE FROM address_book
     -> WHERE firstName= 'Krutika';
 Query OK, 1 row affected (0.09 sec)
+
+UC6 :Ability to Retrieve Person belonging to a City or State from the Address Book
+
+mysql> SELECT * FROM address_book
+    -> WHERE city='Navsari' OR state='Gujrat';
++-----------+-------------+--------------+---------+--------+--------+-------------+--------------+
+| firstName | lastName    | address      | city    | state  | zip    | phoneNumber | email        |
++-----------+-------------+--------------+---------+--------+--------+-------------+--------------+
+| Darshna   | Suryawanshi | ChandanVihar | Navsari | Gujrat | 415643 | 98764556310 | kp@gmail.com |
++-----------+-------------+--------------+---------+--------+--------+-------------+--------------+
+1 row in set (0.02 sec)
