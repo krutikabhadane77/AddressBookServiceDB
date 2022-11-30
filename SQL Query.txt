@@ -82,3 +82,13 @@ Records: 0  Duplicates: 0  Warnings: 0
 mysql> ALTER TABLE address_book ADD NAME VARCHAR(10);
 Query OK, 0 rows affected (0.13 sec)
 Records: 0  Duplicates: 0  Warnings: 0
+
+UC10 :Ability to get number of contact persons i.e. count by type
+
+mysql> SELECT COUNT(TYPE)FROM address_book;
++-------------+
+| COUNT(TYPE) |
++-------------+
+|           2 |
++-------------+
+1 row in set (0.02 sec)
