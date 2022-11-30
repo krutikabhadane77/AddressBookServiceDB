@@ -60,3 +60,15 @@ mysql> SELECT COUNT(city),Count(state) FROM address_book;
 |           2 |            2 |
 +-------------+--------------+
 1 row in set (0.07 sec)
+
+UC8 :Ability to retrieve entries sorted alphabetically by Person’s name for a given city
+
+mysql> SELECT * FROM address_book ORDER BY firstName;
++----+------+-------------+--------------+---------+-------------+--------+-------------+--------------+
+|firstName  | lastName    | address      | city    | state       | zip    | phoneNumber | email        |
++-----------+-------------+--------------+---------+-------------+--------+-------------+--------------+
+| Darshna   | Suryawanshi | ChandanVihar | Navsari | Gujrat      | 415643 | 98764556310 | kp@gmail.com |
+| Krutika   | Patil       | Deopur       | Dhule   | Maharashtra | 424112 | 9876543210  | k@gmail.com  |
++-----------+-------------+--------------+---------+-------------+--------+-------------+--------------+
+2 rows in set (0.05 sec)
+
