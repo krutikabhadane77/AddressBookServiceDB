@@ -18,3 +18,11 @@ mysql> CREATE TABLE address_book
     ->      email VARCHAR(50) NOT NULL,
     ->      );
 Query OK, 0 rows affected (0.10 sec)
+
+UC3 :Ability to insert new Contacts to Address Book
+
+mysql> INSERT INTO address_book(firstName,lastName,address,city,state,zip,phoneNumber,email)VALUES
+    -> ('Krutika','Patil','Deopur','Dhule','Maharashtra',424112,9876543210,'k@gmail.com'),
+    ->  ('Darshna','Suryawanshi','ChandanVihar','Navsari','Gujrat',415643,98764556310,'kp@gmail.com');
+Query OK, 2 rows affected (0.05 sec)
+Records: 2  Duplicates: 0  Warnings: 0
