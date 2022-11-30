@@ -33,3 +33,9 @@ mysql> UPDATE address_book SET city= 'Nashik'
     -> WHERE firstName= 'Krutika';
 Query OK, 1 row affected (0.20 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
+
+UC5 :Ability to delete a person using person's name
+
+mysql> DELETE FROM address_book
+    -> WHERE firstName= 'Krutika';
+Query OK, 1 row affected (0.09 sec)
