@@ -26,3 +26,10 @@ mysql> INSERT INTO address_book(firstName,lastName,address,city,state,zip,phoneN
     ->  ('Darshna','Suryawanshi','ChandanVihar','Navsari','Gujrat',415643,98764556310,'kp@gmail.com');
 Query OK, 2 rows affected (0.05 sec)
 Records: 2  Duplicates: 0  Warnings: 0
+
+UC4 :Ability to edit existing contact person using their name
+
+mysql> UPDATE address_book SET city= 'Nashik'
+    -> WHERE firstName= 'Krutika';
+Query OK, 1 row affected (0.20 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
