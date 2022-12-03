@@ -15,7 +15,7 @@ mysql> CREATE TABLE address_book
     ->      state VARCHAR(50) NOT NULL,
     ->      zip VARCHAR(50) NOT NULL,
     ->      phoneNumber VARCHAR(50) NOT NULL,
-    ->      email VARCHAR(50) NOT NULL,
+    ->      email VARCHAR(50) NOT NULL
     ->      );
 Query OK, 0 rows affected (0.10 sec)
 
@@ -92,3 +92,130 @@ mysql> SELECT COUNT(TYPE)FROM address_book;
 |           2 |
 +-------------+
 1 row in set (0.02 sec)
+
+*****************************************************************
+UC 11 to UC 13
+
+mysql> CREATE TABLE user_name (
+    -> user_id INT NOT NULL AUTO_INCREMENT,
+    -> firstName VARCHAR(100) NOT NULL,
+    -> lastName VARCHAR(100) NOT NULL,
+    -> Name VARCHAR(100) NOT NULL,
+    -> PRIMARY KEY(user_id)
+    -> );
+Query OK, 0 rows affected (0.21 sec)
+
+mysql> INSERT INTO user_name(firstName,lastName,Name)
+    -> VALUES ('Krutika','Patil','-'),
+    -> ('Darshna','Suryawanshi','-');
+Query OK, 2 rows affected (0.04 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> UPDATE user_name SET Name=CONCAT(CONCAT(firstName,' '),lastName)WHERE Name='-'
+    -> ;
+Query OK, 2 rows affected (0.14 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> CREATE TABLE address_data(
+    -> user_id INT NOT NULL,
+    -> address VARCHAR(100) NOT NULL,
+    -> city VARCHAR(50) NOT NULL,
+    -> state VARCHAR(100) NOT NULL,
+    -> zip VARCHAR(20) NOT NULL,
+    -> FOREIGN KEY(user_id) REFERENCES user_name(user_id)
+    -> );
+Query OK, 0 rows affected (0.30 sec)
+
+mysql> INSERT INTO address_data
+    -> VALUES (1,'Deopur','Nashik','Maharashtra',424112),
+    -> (2,'ChandanVihar','Navsari','Gujrat',415643);
+Query OK, 2 rows affected (0.05 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE phone_data(
+    -> user_id INT NOT NULL,
+    -> phoneNumber VARCHAR(20),
+    -> FOREIGN KEY(user_id) REFERENCES user_name(user_id)
+    -> );
+Query OK, 0 rows affected (0.59 sec)
+
+mysql> INSERT INTO phone_data
+    -> VALUES (1,'9876543210'),
+    -> (2,'98764556310');
+Query OK, 2 rows affected (0.15 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE type(
+    -> type_id INT NOT NULL AUTO_INCREMENT,
+    -> type VARCHAR(30) NOT NULL,
+    -> PRIMARY KEY(type_id)
+    -> );
+Query OK, 0 rows affected (0.36 sec)
+
+mysql> INSERT INTO type(type)VALUES('Family'),('Friends');
+Query OK, 2 rows affected (0.06 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM type;
++---------+---------+
+| type_id | type    |
++---------+---------+
+|       1 | Family  |
+|       2 | Friends |
++---------+---------+
+2 rows in set (0.00 sec)
+
+mysql> CREATE TABLE user_type_relation(
+    -> user_id INT NOT NULL,
+    -> type_id INT NOT NULL,
+    -> FOREIGN KEY(user_id) REFERENCES user_name(user_id),
+    -> FOREIGN KEY(type_id) REFERENCES type(tpe_id)
+    -> );
+
+mysql> CREATE TABLE user_type_relation(
+    -> user_id INT NOT NULL,
+    -> type_id INT NOT NULL,
+    -> FOREIGN KEY(user_id) REFERENCES user_name(user_id),
+    -> FOREIGN KEY(type_id) REFERENCES type(type_id)
+    -> );
+Query OK, 0 rows affected (0.35 sec)
+
+mysql> INSERT INTO user_type_relation VALUES
+    -> (1,1),(2,2);
+Query OK, 2 rows affected (0.13 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM user_type_relation;
++---------+---------+
+| user_id | type_id |
++---------+---------+
+|       1 |       1 |
+|       2 |       2 |
++---------+---------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT user.firstName,user.lastName FROM address_data address JOIN user_name user
+    -> ON address.user_id=user.user_id
+    -> WHERE city='Nasik' OR state='Maharashtra';
++-----------+----------+
+| firstName | lastName |
++-----------+----------+
+| Krutika   | Patil    |
++-----------+----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT user.firstName,user.lastName FROM address_data address JOIN user_name user
+    -> ON address.user_id=user.user_id
+    -> WHERE address.city='Navsari' ORDER BY user.Name;
++-----------+-------------+
+| firstName | lastName    |
++-----------+-------------+
+| Darshna   | Suryawanshi |
++-----------+-------------+
+1 row in set (0.12 sec)
+
+mysql> SELECT t.type,COUNT(user.user_id)FROM user_name user
+    -> JOIN user_type_relation utr ON user.user_id=utr.user_id
+    -> JOIN type t ON utr.type_id=t.type
+    -> GROUP by t.type;
+Empty set, 2 warnings (0.05 sec)
